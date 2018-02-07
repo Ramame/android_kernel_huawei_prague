@@ -50,6 +50,8 @@
 int rdr_save_history_log(struct rdr_exception_info_s *p, char *date,
 			 bool is_save_done, u32 bootup_keypoint)
 {
+	return 0;
+#if 0
 	int ret = 0;
 	char buf[HISTORY_LOG_SIZE];
 	struct kstat historylog_stat;
@@ -101,10 +103,13 @@ int rdr_save_history_log(struct rdr_exception_info_s *p, char *date,
 	rdr_savebuf2fs(PATH_ROOT, "history.log", buf, strlen(buf), 1);
 	BB_PRINT_END();
 	return ret;
+#endif
 }
 
 int rdr_save_history_log_for_undef_exception(struct rdr_syserr_param_s *p)
 {
+	return 0;
+#if 0
 	int ret = 0;
 	char buf[HISTORY_LOG_SIZE];
 	struct kstat historylog_stat;
@@ -130,6 +135,7 @@ int rdr_save_history_log_for_undef_exception(struct rdr_syserr_param_s *p)
 	rdr_savebuf2fs(PATH_ROOT, "history.log", buf, strlen(buf), 1);
 	BB_PRINT_END();
 	return ret;
+#endif
 }
 
 /*
@@ -147,6 +153,8 @@ int rdr_save_history_log_for_undef_exception(struct rdr_syserr_param_s *p)
 int rdr_savebuf2fs(char *logpath, char *filename,
 		   void *buf, u32 len, u32 is_append)
 {
+	return 0;
+#if 0
 	int ret = 0, flags;
 	struct file *fp;
 	char path[PATH_MAXLEN];
@@ -190,6 +198,7 @@ out1:
 	BB_PRINT_END();
 out2:
 	return ret;
+#endif
 }
 
 /********************************************************************
@@ -201,6 +210,8 @@ Return:         NA
 ********************************************************************/
 void bbox_save_every_core_data(char *logpath, char *base_addr)
 {
+	return 0;
+#if 0
 	char *addr;
 	int ret;
 	u32 value, size, i;
@@ -277,6 +288,7 @@ void bbox_save_every_core_data(char *logpath, char *base_addr)
 	rdr_savebuf2fs(tmp_logpath, bbox_area_names, addr, size, 0);
 
 	return;
+#endif
 }
 
 void rdr_save_cur_baseinfo(char *logpath)
@@ -446,6 +458,8 @@ Return:         0:success
 ********************************************************************************/
 static int save_dfxbuffer_to_file(struct dfx_head_info *dfx_head_info)
 {
+	return 0;
+#if 0
 	char *buf;
 	int last_number, fd;
 	struct rdr_exception_info_s temp;
@@ -526,6 +540,7 @@ static int save_dfxbuffer_to_file(struct dfx_head_info *dfx_head_info)
 	}
 
 	return 0;
+#endif
 }
 
 /*******************************************************************************
@@ -537,6 +552,8 @@ Return:         NA
 ********************************************************************************/
 void save_dfxpartition_to_file(void)
 {
+	return;
+#if 0
 	char p_name[BDEVNAME_SIZE + 12];
 	void *buf, *dfx_buf, *dfx_buf_temp;
 	int ret, fd_dfx, cnt, need_read_size;
@@ -624,6 +641,7 @@ out:
 	vfree(dfx_buf);
 	kfree(buf);
 	return;
+#endif
 }
 
 /*******************************************************************************

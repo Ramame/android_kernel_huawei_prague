@@ -3308,6 +3308,10 @@ static char *cali_error_code_str[] = {"NULL", "NA", "EXEC_FAIL", "NV_FAIL", "COM
 
 static void save_to_file(const char *file_path, const char *content)
 {
+	/* Meticulus:
+	 * I have no use for these logs so lets disable them.
+	 */
+	return;
 	static mm_segment_t oldfs;
 	struct file *fp = NULL;
 
