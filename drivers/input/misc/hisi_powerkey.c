@@ -38,6 +38,8 @@
 #include <linux/syscalls.h>
 #include <linux/hisi/hisi_bootup_keypoint.h>
 
+#include <linux/dt2w.h>
+
 #ifdef CONFIG_HISI_BB
 #include <linux/hisi/rdr_hisi_platform.h>
 #include <linux/hisi/rdr_pub.h>
@@ -393,6 +395,7 @@ static int hisi_powerkey_probe(struct platform_device *pdev)
 		ret = -ENOENT;
 		goto input_err;
 	}
+	register_power_input(info->idev);
 
 	platform_set_drvdata(pdev, info);
 

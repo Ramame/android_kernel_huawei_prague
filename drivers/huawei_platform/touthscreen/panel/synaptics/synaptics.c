@@ -17,6 +17,11 @@
 #include "tui.h"
 #endif
 
+#include <linux/input.h>
+#include <linux/dt2w.h>
+#define POWER_KEY_RELEASE	(0)
+#define POWER_KEY_PRESS		(1)
+
 #define SYNAPTICS_CHIP_INFO "synaptics-"
 #define EASY_WAKEUP_FASTRATE 0x011D
 #define F54_ANALOG_CMD0  0x016F
@@ -171,6 +176,9 @@ static void synaptics_rmi4_report_touch(struct synaptics_rmi4_data *rmi4_data,
 
 extern int hisifb_esd_recover_disable(int value);
 static int g_report_err_log_count = 0;
+
+
+static struct input_dev *idev;
 
 #define GLOVE_SWITCH_ADDR 0x0400
 
@@ -6030,6 +6038,11 @@ static int synaptics_rmi4_f51_init(struct synaptics_rmi4_data *rmi4_data,
 	return 0;
 }
 
+void register_power_input(struct input_dev *dev) {
+    idev = dev;
+    TS_LOG_DEBUG("Meticulus: power input registered with TS.\n");
+}
+
 static int synaptics_input_config(struct input_dev *input_dev)
 {
 	set_bit(EV_SYN, input_dev->evbit);
@@ -6197,6 +6210,15 @@ static int synaptics_rmi4_key_gesture_report(struct synaptics_rmi4_data
 	case DOUBLE_CLICK_WAKEUP:
 		if (IS_APP_ENABLE_GESTURE(GESTURE_DOUBLE_CLICK) &
 		    gesture_report_info->easy_wakeup_gesture) {
+			if(idev) {
+			    input_report_key(idev, KEY_POWER, POWER_KEY_PRESS);
+			    input_sync(idev);
+			    input_report_key(idev, KEY_POWER, POWER_KEY_RELEASE);
+			    input_sync(idev);
+			    TS_LOG_INFO("Meticulus: KEY_POWER reported!\n");
+			} else {
+			    TS_LOG_INFO("Meticulus: power key not registered!\n");
+			}
 			TS_LOG_INFO("@@@DOUBLE_CLICK_WAKEUP detected!@@@\n");
 			reprot_gesture_key_value = TS_DOUBLE_CLICK;
 			LOG_JANK_D(JLID_TP_GESTURE_KEY, "JL_TP_GESTURE_KEY");
