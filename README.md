@@ -16,7 +16,8 @@
 * Run the following command:
 
 **cd kernel/huawei/prague
-./build.sh**
+
+**./build.sh
 
 * Where is Image file?
 go to **out/arch/arm64/boot/** and inside that folder will find an image called **Image**..flash it..enjoy..
