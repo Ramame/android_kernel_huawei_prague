@@ -3,9 +3,9 @@
 * This is the kernel source for PRA-LXX aka "Prague" devices, if you want to compile your image just follow my own steps;
 
 ## Compatibility
-[![Android 7.x Nougat](https://img.shields.io/badge/Android 7.x Nougat-yes-green.svg?style=flat)]()
 
-[![Android 8.x Oreo](https://img.shields.io/badge/Android 8.x Oreo-yes-green.svg?style=flat)]()
+* Android 7.x Nougat = YES
+* Android 8.x Oreo = YES
 
 ## Compile Your Own Kernel
 
