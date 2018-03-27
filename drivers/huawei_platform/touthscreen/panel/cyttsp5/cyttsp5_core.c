@@ -6665,7 +6665,7 @@ static int fb_notifier_callback(struct notifier_block *self,
 			} else {
 				cyttsp5_core_resume(cd->dev);
 			}
-		} else if (*blank == FB_BLANK_POWERDOWN) {
+		} else if (*blank == FB_BLANK_POWERDOWN || *blank == FB_BLANK_NORMAL) {
 			TS_LOG_INFO("%s: POWERDOWN! interrupt_num = %d\n", __func__, g_interrupt_num);
 			g_interrupt_num = 0;
 			if (cd->cpdata->has_holster == 1) {
